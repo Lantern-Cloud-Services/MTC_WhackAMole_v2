@@ -2,7 +2,7 @@
 variable "name" {
   type        = "string"
   description = "Location of the azure resource group."
-  default     = "demo-whack-a-mole"
+  default     = "demo-mtc-appdev-whackamolev2-rg1"
 }
 
 variable "environment" {
@@ -24,8 +24,9 @@ variable tags {
   description = "Tags to apply on all groups and resources."
 
   default = {
-    mtc-architect = "Joey Lorich"
+    mtc-architect = "Jason Cook"
     deployed-with = "Terraform"
+    created-date  = "03/29/22"
   }
 }
 
@@ -52,7 +53,7 @@ variable "node_os" {
 variable "dns_prefix" {
   type        = "string"
   description = "DNS Prefix"
-  default     = "mtc-whack-a-mole"
+  default     = "mtc-whack-a-mole-v2"
 }
 
 // Network information
