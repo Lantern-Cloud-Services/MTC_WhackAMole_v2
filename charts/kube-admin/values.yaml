@@ -1,0 +1,5 @@
+image:
+  repository: kube-admin
+  tag: latest
+app:
+  name: kube-admin
