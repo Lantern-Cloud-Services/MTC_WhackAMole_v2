@@ -6,8 +6,7 @@ pool:
 trigger:
   branches: 
     include:
-      #- master
-      - feature/terraform
+      - master
   paths:
     include:
       - terraform
