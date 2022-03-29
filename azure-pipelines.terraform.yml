@@ -14,11 +14,11 @@ trigger:
 
 steps:
 # Verify template and generate terraform plan
-#- script: |
-#    echo 'cmd: terraform fmt -check=true'
-#    cd terraform    
-#    terraform fmt -check
-#  displayName: Verify terraform template
+- script: |
+    echo 'cmd: terraform fmt -check=true'
+    cd terraform    
+    terraform fmt -check
+  displayName: Verify terraform template
 
 - script: |
     echo 'cmd: cp terraform/* ./ $(Build.ArtifactStagingDirectory) -R'
