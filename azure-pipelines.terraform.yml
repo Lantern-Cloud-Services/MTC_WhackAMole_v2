@@ -14,6 +14,11 @@ trigger:
       - auzre-pipelines.terraform.yml
 
 steps:
+- task: terraforminit@0
+  inputs:
+    cwd: 'terraform'
+    useazurerm: false
+    initbackend: false
 - task: TerraformCLI@0
   inputs:
     command: 'validate'
