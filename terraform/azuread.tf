@@ -1,6 +1,5 @@
 resource "azuread_application" "default" {
   display_name = "${var.name}-${var.environment}"
-  name = "${var.name}-${var.environment}"
 }
 
 resource "azuread_service_principal" "default" {
