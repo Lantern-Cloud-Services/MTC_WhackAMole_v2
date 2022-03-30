@@ -2,6 +2,10 @@ resource "azurerm_kubernetes_cluster" "default" {
   name                = "${var.name}-aks"
   location            = "${azurerm_resource_group.default.location}"
   resource_group_name = "${azurerm_resource_group.default.name}"
+  default_node_pool {
+      name       = "default"
+      vm_size    = "${var.node_type.deault}"
+  }
   dns_prefix          = "${var.name}-aks-${var.environment}"
   depends_on          = [azurerm_role_assignment.default]
 
