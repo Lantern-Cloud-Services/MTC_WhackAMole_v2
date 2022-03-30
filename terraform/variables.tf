@@ -20,7 +20,7 @@ variable "location" {
 }
 
 variable tags {
-  type        = "map"
+  type        = map
   description = "Tags to apply on all groups and resources."
 
   default = {
