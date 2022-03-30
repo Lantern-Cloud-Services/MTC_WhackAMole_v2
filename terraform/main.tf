@@ -6,7 +6,3 @@ resource "azurerm_resource_group" "default" {
 }
 
 data "azurerm_subscription" "current" {}
-
-provider "azurerm" {
-  features {}
-}
