@@ -2,7 +2,7 @@
 variable "name" {
   type        = string
   description = "Location of the azure resource group."
-  default     = "demo-mtc-appdev-whackamolev2-rgAuto"
+  default     = "demo-mtc-appdev-whackamolev2"
 }
 
 variable "environment" {
