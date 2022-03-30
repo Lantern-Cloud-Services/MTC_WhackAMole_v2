@@ -37,10 +37,10 @@ resource "azurerm_kubernetes_cluster" "default" {
 #      log_analytics_workspace_id = "${azurerm_log_analytics_workspace.default.id}"
 #    }
 
-    http_application_routing {
-      enabled = true
-    }
-  }
+#    http_application_routing {
+#      enabled = true
+#    }
+#  }
 
   tags = "${var.tags}"
 }
