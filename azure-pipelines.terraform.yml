@@ -14,17 +14,6 @@ trigger:
       - auzre-pipelines.terraform.yml
 
 steps:
-- task: terraforminit@0
-  inputs:
-    cwd: 'terraform'
-    useazurerm: false
-    initbackend: false
-- task: TerraformCLI@0
-  inputs:
-    command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-    allowTelemetryCollection: true
-
 # Verify template and generate terraform plan
 #- script: |
 #    echo 'cmd: terraform fmt -check=true'
@@ -32,10 +21,10 @@ steps:
 #    terraform fmt -check
 #  displayName: Verify terraform template
 
-#- script: |
-#    echo 'cmd: cp terraform/* ./ $(Build.ArtifactStagingDirectory) -R'
-#    cp terraform/* ./ $(Build.ArtifactStagingDirectory) -R  
-#  displayName: Copy terraform template to the staging directory
+- script: |
+    echo 'cmd: cp terraform/* ./ $(Build.ArtifactStagingDirectory) -R'
+    cp terraform/* ./ $(Build.ArtifactStagingDirectory) -R  
+  displayName: Copy terraform template to the staging directory
 
   # Publish build artifacts
-#- task: PublishBuildArtifacts@1
+- task: PublishBuildArtifacts@1
