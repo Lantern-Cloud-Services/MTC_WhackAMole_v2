@@ -28,5 +28,5 @@ controller:
 EOF
   ]
 
-  depends_on = ["kubernetes_cluster_role_binding.tiller"]
+  depends_on = [kubernetes_cluster_role_binding.tiller]
 }
