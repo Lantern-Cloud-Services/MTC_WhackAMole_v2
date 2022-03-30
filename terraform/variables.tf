@@ -1,6 +1,6 @@
 // Naming
 variable "name" {
-  type        = "string"
+  type        = string
   description = "Location of the azure resource group."
   default     = "demo-mtc-appdev-whackamolev2-rg1"
 }
