@@ -18,10 +18,10 @@ resource "azurerm_kubernetes_cluster" "default" {
   #  vnet_subnet_id  = "${azurerm_subnet.aks.id}"
   #}
 
-  #service_principal {
-  #  client_id     = "${azuread_application.default.application_id}"
-  #  client_secret = "${azuread_service_principal_password.default.value}"
-  #}
+  service_principal {
+    client_id     = "${azuread_application.default.application_id}"
+    client_secret = "${azuread_service_principal_password.default.value}"
+  }
 
   #role_based_access_control {
   #  enabled = true
