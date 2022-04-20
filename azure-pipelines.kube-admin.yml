@@ -7,7 +7,7 @@ trigger:
   branches: 
     include:
       #- master
-      - feature/terraform
+      - dev
   paths:
     include:
       - src/WhackAMole.KubeAdmin
@@ -17,14 +17,14 @@ trigger:
       - azure-pipelines.kube-admin.yml
 
 variables:
-  acr_name: mtcdensandboxdemo
+  acr_name: demomtcappdevwhackamolev2devacr
   image_name: whack-a-mole/kube-admin:$(Build.BuildNumber)
 
 steps:
 - task: AzureCLI@1
   displayName: 'Azure CLI '
   inputs:
-    azureSubscription: 'MTC Denver Sandbox'
+    azureSubscription: 'jcookAIA'
     scriptLocation: inlineScript
     inlineScript: |
       # User ACR to build and tag our container
