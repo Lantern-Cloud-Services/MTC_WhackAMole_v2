@@ -7,7 +7,7 @@ trigger:
   branches: 
     include:
       #- master
-      - feature/terraform
+      - dev
   paths:
     include:
       - src/WhackAMole.KubeAdmin
@@ -17,7 +17,7 @@ trigger:
       - azure-pipelines.kube-admin.yml
 
 variables:
-  acr_name: mtcdensandboxdemo
+  acr_name: demomtcappdevwhackamolev2devacr
   image_name: whack-a-mole/kube-admin:$(Build.BuildNumber)
 
 steps:
