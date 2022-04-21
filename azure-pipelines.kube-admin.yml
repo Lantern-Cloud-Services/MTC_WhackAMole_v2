@@ -50,4 +50,4 @@ steps:
     repository: 'whack-a-mole'
     command: 'buildAndPush'
     Dockerfile: './src/Dockerfile.KubeAdmin'
-    tags: '$(image_name)'
+    tags: '$(Build.BuildNumber)'
