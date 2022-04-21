@@ -46,8 +46,8 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'ACRDockerRegistryaa'
-    repository: 'whack-a-mole'
+    containerRegistry: 'ACRDockerRegistry'
+    repository: 'whack-a-mole/kube-admin'
     command: 'buildAndPush'
     Dockerfile: './src/Dockerfile.KubeAdmin'
     tags: '$(Build.BuildNumber)'
