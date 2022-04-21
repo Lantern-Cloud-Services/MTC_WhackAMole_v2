@@ -27,10 +27,10 @@ steps:
     azureSubscription: 'jcookAIA'
     scriptLocation: inlineScript
     inlineScript: |
-      az acr login --name $(acr_name)
+      #az acr login --name $(acr_name)
 
       # User ACR to build and tag our container
-      #az acr build -r $(acr_name) -t $(image_name) -f ./src/Dockerfile.KubeAdmin ./src
+      az acr build -r $(acr_name) -t $(image_name) -f ./src/Dockerfile.KubeAdmin ./src
       
       # Package the helm chart and push it to ACR
       helm init --client-only
@@ -44,10 +44,10 @@ steps:
 #    Dockerfile: './src/Dockerfile.KubeAdmin'
 #    tags: '$(image_name)'
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'ACRDockerRegistry'
-    repository: 'whack-a-mole/kube-admin'
-    command: 'buildAndPush'
-    Dockerfile: './src/Dockerfile.KubeAdmin'
-    tags: '$(Build.BuildNumber)'
+#- task: Docker@2
+#  inputs:
+#    containerRegistry: 'ACRDockerRegistry'
+#    repository: 'whack-a-mole/kube-admin'
+#    command: 'buildAndPush'
+#    Dockerfile: './src/Dockerfile.KubeAdmin'
+#    tags: '$(Build.BuildNumber)'
