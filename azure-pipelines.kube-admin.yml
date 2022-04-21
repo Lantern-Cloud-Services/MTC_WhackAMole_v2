@@ -17,7 +17,7 @@ trigger:
       - azure-pipelines.kube-admin.yml
 
 variables:
-  acr_name: demomtcappdevwhackamolev2devacr
+  acr_name: demomtcappdevwhackamolev2devacr.azurecr.io
   image_name: whack-a-mole/kube-admin:$(Build.BuildNumber)
 
 steps:
