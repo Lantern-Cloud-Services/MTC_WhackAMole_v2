@@ -1,28 +1,94 @@
-name: Build a Docker image and Push it to ACR
+#Name of the GitHub Action
+name: Deploy hello world Logic App
 
+#Set the action on which the workflow will trigger
 on:
-  workflow_dispatch:
-  #push:
-    branches:
-      - dev
-
+ workflow_dispatch:
+ #push:
+ #  tags: 
+ #    - v1.0.1
+   branches:
+     - master
 jobs:
-  build-and-push-docker-image:
+  # Composite action
+  hello_world_job:
+    # Approval gate
+    environment:
+     name: dev
     runs-on: ubuntu-latest
+    name: A job to say hello
     steps:
-    - name: Get code from the repository
-      uses: actions/checkout@v1
-      with:
-        ref: main
+      - uses: actions/checkout@v2
+      - id: foo
+        uses: Lantern-Cloud-Services/demo-mtc-appdev-composite-action@v3
+        with:
+          who-to-greet: 'jdvc the dev'
+      - run: echo random-number ${{ steps.foo.outputs.random-number }}
+        shell: bash
+  
+  
+  validate-and-deploy:
+   runs-on: ubuntu-latest
+   #runs-on: self-hosted
+   env:
+     ENV_RESOURCEGROUP: demo-mtc-appdev-ghDemo-rg2
+     ENV_RESOURCEGROUPLOCATION: westus
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v1.1.0
+   steps:
+
+    #Checkout the repository
+    - name: Checkout Repository
+      uses: actions/checkout@master
+
+    #Use the azure provided action to log on to azure using service pricipal
+    - name: Login to Azure
+      uses: azure/login@v1
       with:
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-        registry: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        path: .
-        dockerfile: './src/Dockerfile.KubeAdmin'
-        repository: 'whack-a-mole'
-        tags: 'latest'
-        push: true
+          creds: ${{secrets.GHDEMOLOGIN}}
+    
+#    - name: deployment-what-if
+#      uses: Azure/deployment-what-if-action@v1.0.0
+#      with:
+        # Subscription ID
+#        subscription: 'jcookAIA'
+        # Resource group name
+ #       resourceGroup: ${{env.ENV_RESOURCEGROUP}}
+        # ARM template or Bicep file
+ #       templateFile: ./template.json
+        # Parameters file for the ARM template or Bicep
+ #       parametersFile:  ./parameters.json
+        # Additional parameters to be applied on the ARM template or Bicep. Multiple parameters should be separated by spaces.
+        # additionalParameters: # optional
+
+    # Create the resource group
+    - name: Create Resource Group
+      run: az group create -n ${{env.ENV_RESOURCEGROUP}} -l ${{env.ENV_RESOURCEGROUPLOCATION}}
+
+    #Validate the  ARM template
+    - name: Validate ARM template
+      run: |
+        az deployment group validate -g ${{env.ENV_RESOURCEGROUP}} --mode Incremental --template-file ./template.json --parameters ./parameters.json
+   
+
+    #Deploy the ARM Template
+    - name: Deploy Logic App
+      run: |
+       az group deployment create -g ${{env.ENV_RESOURCEGROUP}} --template-file ./template.json --parameters ./parameters.json
+      shell: bash   
+      
+    # Log Out From Azure 
+    - name: Logout
+      run: az logout
+      
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
