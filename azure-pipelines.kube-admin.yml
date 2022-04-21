@@ -27,8 +27,6 @@ steps:
     azureSubscription: 'jcookAIA'
     scriptLocation: inlineScript
     inlineScript: |
-      #az acr login --name $(acr_name)
-
       # User ACR to build and tag our container
       az acr build -r $(acr_name) -t $(image_name) -f ./src/Dockerfile.KubeAdmin ./src
       
