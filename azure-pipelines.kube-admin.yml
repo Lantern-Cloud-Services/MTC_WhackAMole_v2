@@ -37,9 +37,17 @@ steps:
       helm package charts/kube-admin --version $(Build.BuildNumber)
       az acr helm push -n $(acr_name) kube-admin-$(Build.BuildNumber).tgz
 
-- task: ContainerBuild@0
+#- task: ContainerBuild@0
+#  inputs:
+#    dockerRegistryServiceConnection: 'ACRDockerRegistry'
+#    repository: 'demomtcappdevwhackamolev2devacr'
+#    Dockerfile: './src/Dockerfile.KubeAdmin'
+#    tags: '$(image_name)'
+
+- task: Docker@2
   inputs:
-    dockerRegistryServiceConnection: 'ACRDockerRegistry'
-    repository: 'demomtcappdevwhackamolev2devacr'
+    containerRegistry: 'ACRDockerRegistry'
+    repository: 'whack-a-mole'
+    command: 'buildAndPush'
     Dockerfile: './src/Dockerfile.KubeAdmin'
     tags: '$(image_name)'
