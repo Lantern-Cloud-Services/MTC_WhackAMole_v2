@@ -8,7 +8,7 @@ on:
  #  tags: 
  #    - v1.0.1
    branches:
-     - master
+     - dev
 jobs:
   # Composite action
   hello_world_job:
