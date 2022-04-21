@@ -2,9 +2,9 @@ name: Build a Docker image and Push it to ACR
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - dev
+#  push:
+#    branches:
+#      - dev
 
 jobs:
   build-and-push-docker-image:
