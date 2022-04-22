@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:sdk AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
 
 COPY WhackAMole.KubeAdmin/*.csproj ./WhackAMole.KubeAdmin/
@@ -7,10 +7,10 @@ RUN dotnet restore ./WhackAMole.KubeAdmin/WhackAMole.KubeAdmin.csproj
 
 COPY . ./
 
-RUN dotnet publish ./WhackAMole.KubeAdmin/WhackAMole.KubeAdmin.csproj -c Debug -o out
+RUN dotnet publish ./WhackAMole.KubeAdmin/WhackAMole.KubeAdmin.csproj -c Debug -o ./WhackAMole.KubeAdmin/out
 
 
-FROM microsoft/dotnet:aspnetcore-runtime
+FROM mcr.microsoft.com/dotnet/runtime:6.0
 WORKDIR /app
 EXPOSE 8080
 COPY --from=build-env /app/WhackAMole.KubeAdmin/out .

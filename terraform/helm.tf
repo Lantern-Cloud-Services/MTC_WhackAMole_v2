@@ -8,7 +8,7 @@ provider "helm" {
     cluster_ca_certificate = "${base64decode(azurerm_kubernetes_cluster.default.kube_config.0.cluster_ca_certificate)}"
   }
 
-  service_account = "tiller"
+#  service_account = "tiller"
 }
 
 # Install a load-balanced nginx-ingress controller onto the cluster
@@ -28,5 +28,5 @@ controller:
 EOF
   ]
 
-  depends_on = ["kubernetes_cluster_role_binding.tiller"]
+  depends_on = [kubernetes_cluster_role_binding.tiller]
 }
